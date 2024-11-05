@@ -3,6 +3,10 @@ import styles from './TodoList.module.css'
 
 function TodoList(){
 
+    useEffect(() => {
+        document.title = "Online To-Do List";
+    }, []);
+
     const[tasks, setTasks] = useState(() => {
         const data = window.localStorage.getItem('todolistitems');
         if(data !== null) return JSON.parse(data);
