@@ -1,0 +1,135 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(49, 49, 49);
+    padding-top: 13rem;
+}
+.todoList *{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.title{
+    color: rgb(255, 255, 255);
+    font-size: 6rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.headerBar{
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    background-color: rgb(49, 49, 49);
+    box-shadow: 0 2px 20px 2px rgba(0, 0, 0, 1);
+    height: 15rem;
+    z-index: 1000;
+}
+
+
+.inputField{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input{
+    border: 2px solid black;
+    background-color: rgb(227, 227, 227);
+    border-radius: 5px;
+    width: 40rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    text-align: center;
+    outline: none;
+}
+.add{
+    background-color: hsl(85, 50%, 50%);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    height: 3.3rem;
+    width: 5rem;
+    font-size: 1.5rem;
+    margin-left: 5px;
+    transition: background-color 0.5s ease;
+}
+.add:hover{
+    background-color: hsl(85, 50%, 30%);
+}
+.clear{
+    background-color: hsl(40, 100%, 50%);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    height: 3.3rem;
+    width: 3rem;
+    font-size: 1.5rem;
+    margin-left: 5px;
+    transition: background-color 0.5s ease;
+}
+.clear:hover{
+    background-color: hsl(40, 100%, 30%);
+}
+.empty{
+    background-color: hsl(0, 0%, 0%);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    height: 3.3rem;
+    width: 12rem;
+    font-size: 1.5rem;
+    margin-left: 5px;
+    transition: background-color 1s ease, box-shadow 1s ease;
+}
+.empty:hover{
+    background-color: hsl(0, 100%, 50%);
+    box-shadow: 0 0 40px rgb(255, 0, 0);
+}
+.unordered{
+    padding: 30px;
+    list-style: none;
+}
+.listItem{
+    font-size: 2rem;
+    border: 2px solid black;
+    background-color: hsl(0, 0%, 80%);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.text{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    overflow:auto;
+}
+
+.delete{
+    background-color: hsl(13, 100%, 55%);
+}
+.delete:hover{
+    background-color: hsl(13, 100%, 35%);
+}
+.up, .down{
+    background-color: hsl(203, 100%, 60%);
+}
+.up:hover, .down:hover{
+    background-color: hsl(203, 100%, 40%);
+}
+
+.delete, .up, .down{
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+
+}
