@@ -12,6 +12,7 @@ function TodoList(){
         if(data !== null) return JSON.parse(data);
         return [];
     });
+
     const[newTask, setNewTask] = useState('');
 
     useEffect(() => {
@@ -21,7 +22,8 @@ function TodoList(){
 
     useEffect(() => {
         window.localStorage.setItem('todolistitems', JSON.stringify(tasks))
-    }, [tasks]);    
+    }, [tasks]);   
+    ;
 
     function handleEnter(event){
         if(event.key === 'Enter'){
@@ -45,7 +47,7 @@ function TodoList(){
     function addTask(){
 
         if(newTask.trim() !== ""){
-            setTasks(t => [...t, newTask.charAt(0).toUpperCase() + newTask.slice(1)]);
+            setTasks(t => [{text: newTask.charAt(0).toUpperCase() + newTask.slice(1), isChecked: false}, ...t]);
             setNewTask('');
         }
     }
@@ -74,6 +76,43 @@ function TodoList(){
         }
     }
 
+    function checkItem(index){
+       
+        let tempIndex = 0;
+        
+        let updatedList = tasks.map((task, i) => 
+            i === index ? {...task, isChecked: !task.isChecked } : task );
+
+        let temp = updatedList[index];
+
+        if(!tasks[index].isChecked){
+
+            for(let i = index; i < tasks.length; i++){
+                updatedList[i] = updatedList[i+1];
+            }
+
+            updatedList[tasks.length-1] = temp;
+
+        }
+        if(tasks[index].isChecked){
+            for(let i = 0; i < tasks.length; i++){
+                if(tasks[i].isChecked){
+                    tempIndex = i;
+                    break;
+                }
+            }
+            
+            for(let i = index; i > tempIndex; i--){
+                updatedList[i] = updatedList[i-1];
+            } 
+
+            updatedList[tempIndex] = temp;
+        }
+        
+
+        setTasks(updatedList); 
+    }
+
     return(
         <>
             <div className={styles.todoList}>
@@ -100,18 +139,25 @@ function TodoList(){
                 </div>  
                 <div>
                     <ul className={styles.unordered}>
+
                         {tasks.map((task, index) => 
-                        <li key={index} className={styles.listItem}>
-                            <span className={styles.text}>{task}</span>
+                        <li key={index} className={styles.listItem}
+                            style={{backgroundColor: task.isChecked? 'rgb(60, 60, 60)' : undefined}}>
+
+                            <input type="checkbox" name="complete" checked={task.isChecked} onChange={() => checkItem(index)} className={styles.check}></input>
+                            <span className={styles.text}>{task.text}</span>
                             <button className={styles.up}
+                                    style={{backgroundColor: task.isChecked? 'rgb(50, 50, 50)' : undefined}}
                                     onClick={() => moveTaskUp(index)}>
                                 ▲
                             </button>
                             <button className={styles.down}
+                                    style={{backgroundColor: task.isChecked ? 'rgb(50, 50, 50)' : undefined}}
                                     onClick={() => moveTaskDown(index)}>
                                 ▼
                             </button>
                             <button className={styles.delete}
+                                    style={{backgroundColor: task.isChecked? 'rgb(50, 50, 50)' : undefined}}
                                     onClick={() => deleteTask(index)}>
                                 DELETE
                             </button>
